@@ -1,0 +1,24 @@
+{
+  "name": "giveawaybot",
+  "version": "1.0.0",
+  "description": "24h giveaway bot made for runestake",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./src/index.js"
+  },
+  "keywords": [
+    "bot",
+    "discord",
+    "giveaway"
+  ],
+  "author": "Rawfodoc",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^13.6.0",
+    "dotenv": "^14.2.0",
+    "nodemon": "^2.0.15",
+    "sqlite3": "^5.0.2",
+    "verbose": "^0.2.3"
+  }
+}
