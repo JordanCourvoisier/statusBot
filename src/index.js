@@ -10,7 +10,7 @@ client.guilds.fetch('828085716902477894'); // CHANGE TO CORRECT GUILD
 client.on("ready", async () => {
     // Once a day (in milliseconds)
     console.log("ready");
-    setInterval(chooseWinners,  1000 * 60);// * 60 * 3);// * 60 * 3);// * 60 * 60 * 2);//4); 
+    setInterval(chooseWinners,  1000 * 60 * 60 * 24); 
 });
 
 var winners = 5;
