@@ -83,7 +83,8 @@ async function inTable(id){
 // Watches for user custom status change
 client.on("presenceUpdate", async (oldPresence, newPresence) => {
    // for(let x = 0; x < newPresence.member.presence.activities.length; x++) console.log(x + newPresence.member.presence.activities[x]);
-    if(newPresence.member.presence.activities[0] == 'Custom Status' && newPresence.member.presence.activities[0].state != null){    
+   try{
+   if(newPresence.member.presence.activities[0] == 'Custom Status' && newPresence.member.presence.activities[0].state != null){    
         let userID = newPresence.member.id;  
         let tableBool = await inTable(userID);
         const member = client.users.cache.find(user => user.id == userID);
@@ -117,6 +118,7 @@ client.on("presenceUpdate", async (oldPresence, newPresence) => {
         } catch (error) { console.log("Unable to message user, has still been removed from raffle"); }
         }
     }
+    }catch(error){}
 });
 
 async function chooseWinners(){
