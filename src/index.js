@@ -82,9 +82,8 @@ async function inTable(id){
 
 // Watches for user custom status change
 client.on("presenceUpdate", async (oldPresence, newPresence) => {
-   // for(let x = 0; x < newPresence.member.presence.activities.length; x++) console.log(x + newPresence.member.presence.activities[x]);
    try{
-   if(newPresence.member.presence.activities[0] == 'Custom Status' && newPresence.member.presence.activities[0].state != null){    
+   if(newPresence.member.presence.activities[0].state != undefined && newPresence.member.presence.activities[0] == 'Custom Status' ){    
         let userID = newPresence.member.id;  
         let tableBool = await inTable(userID);
         const member = client.users.cache.find(user => user.id == userID);
@@ -102,20 +101,20 @@ client.on("presenceUpdate", async (oldPresence, newPresence) => {
             else
                 console.log("inserted successfully");
             });
-            try {member.send("Congrats!   :tada:\n\nYou have been entered in the daily 50m raffle. \n\nNote: Any change in your status within the 24 hour time-frame will remove you from the raffle.");
-            } catch (error) { console.log("Unable to message user, has still been added to raffle"); }
 
+            let msg = "Congrats!   :tada:\n\nYou have been entered in the daily 50m raffle. \n\nNote: Any change in your status within the 24 hour time-frame will remove you from the raffle.";
+            member.send(msg).catch(console.error);
 
         // Remove from db and send message
-        }else if(tableBool && !newPresence.member.presence.activities[0].state.toLowerCase().includes(keyPhrase.toLowerCase())){
+        }else if(newPresence.member.presence.activities[0].state != undefined && tableBool && !newPresence.member.presence.activities[0].state.toLowerCase().includes(keyPhrase.toLowerCase())){
             db.run(`DELETE FROM contestants WHERE UID=?`, userID, function(err) {
                 if (err) {
                     return console.error(err.message);
                 }
                 console.log("contestant deleted");
             });
-          try {  member.send("Sorry!  :pensive: \n\nYour discord status has been changed and you have been removed from the 50m raffle.\n\nPlease change your status back to be re-entered into the raffle.");
-        } catch (error) { console.log("Unable to message user, has still been removed from raffle"); }
+          let msg = ("Sorry!  :pensive: \n\nYour discord status has been changed and you have been removed from the 50m raffle.\n\nPlease change your status back to be re-entered into the raffle.");
+          member.send(msg).catch(console.error);
         }
     }
     }catch(error){}
