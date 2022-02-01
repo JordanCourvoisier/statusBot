@@ -23,8 +23,6 @@ client.on('message', (message) => {
                 let newPhrase = message.content.substring(19);
                 message.channel.send("The new entry phrase is \"" + newPhrase+ "\"");
                 keyPhrase = newPhrase;
-                chooseWinners();
-
             }
         }    
         else if(message.content.toLowerCase().startsWith("/24h change winners")){
@@ -34,6 +32,11 @@ client.on('message', (message) => {
                     message.channel.send("There are now " + newWinners + " winners");
                     winners = newWinners;
                 }else message.channel.send("Please try again using a number");
+            }
+        }
+        else if(message.content.toLowerCase().startsWith("/24h postWinners-")){
+            if(message.member.roles.cache.some(role => role.id === '935651789125062677')){
+                chooseWinners();
             }
         }
 });
