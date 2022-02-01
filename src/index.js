@@ -34,7 +34,7 @@ client.on('message', (message) => {
                 }else message.channel.send("Please try again using a number");
             }
         }
-        else if(message.content.toLowerCase().startsWith("/24h postWinners-")){
+        else if(message.content.toLowerCase().startsWith("/24h postWinners")){
             if(message.member.roles.cache.some(role => role.id === '935651789125062677')){
                 chooseWinners();
             }
